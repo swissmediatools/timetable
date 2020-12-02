@@ -13,15 +13,15 @@ export class TimetableQueryComponent implements OnInit {
   public queryForm: FormGroup;
   public queryResult: any;
   public queryDetail: any;
-  public showmask: boolean = false;
+  public cityfrom: any;
+  public cityto: any;
 
   constructor( private _fb: FormBuilder, private _api: SearchapiService, private _router : Router ) { }
 
   ngOnInit(): void {
-    this.showmask = false;
     this.queryForm = this._fb.group({
-      From: [ 'Satigny',[  Validators.required ]],
-      To: [ 'Saint-Léonard',[  Validators.required ]],
+      From: [ '',[  Validators.required ]],
+      To: [ '',[  Validators.required ]],
       Date: [ new Date(),[  Validators.required ]],
       Time: [ new Date(),[  Validators.required ]]
     });
@@ -30,11 +30,47 @@ export class TimetableQueryComponent implements OnInit {
   public async runQuery()
   {
       const queryvalues = this.queryForm.value;
-      this.showmask = true;
       console.log('RunQuery ! values => ',queryvalues);
       this.queryResult = await this._api.getRoute(queryvalues.From,queryvalues.To,new Date());
-      this.showmask = false;
       this._router.navigate(['result']);
+  }
+
+  public async getCity(divid: string)
+  { 
+      const startlen = 2;
+      if (divid=='from')
+      {
+        const term = this.queryForm.value.From;
+        if (term.length>=startlen)
+        {
+          this.cityfrom = await this._api.completeCity(term);
+          console.log('cityfrom => ',this.cityfrom);
+        } else {
+          console.log('term <3 cars');
+          this.cityfrom = null;
+        }
+      } else {
+        const term = this.queryForm.value.To;
+        if (term.length>=startlen)
+        {
+          this.cityto = await this._api.completeCity(term);
+          console.log('cityfrom => ',this.cityto);
+        }
+      }
+  }
+
+  public setCity(name: string, divid: string)
+  {
+      if (divid==='from')
+      {
+        this.queryForm.patchValue({['From']:name})
+        this.cityfrom = null;
+      }
+      if (divid==='to')
+      {
+        this.queryForm.patchValue({['To']:name})
+        this.cityto = null;
+      }
   }
 
 }

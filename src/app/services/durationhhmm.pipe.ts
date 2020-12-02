@@ -17,11 +17,16 @@ export class DurationhhmmPipe implements PipeTransform {
 
     } else {
 
-      result = hours + ':';
+      result = hours.toFixed(0) + ':';
       let hoursflat = parseInt(hours.toFixed(0));
       let minutesflat = hoursflat * 60;
       let soldminutes = minutes - minutesflat;
-      soldminutes <10 ? result += '0' + soldminutes : result += soldminutes;
+      if (soldminutes<10)
+      {
+        result += '0' + soldminutes;
+      } else {
+        result += soldminutes;
+      }
 
     }
     

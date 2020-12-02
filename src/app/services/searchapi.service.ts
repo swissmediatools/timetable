@@ -21,7 +21,7 @@ export class SearchapiService {
     return result;
   }
 
-  public async getCity( term:string, div: string )
+  public async completeCity( term:string )
   {
     const thisApi = this._completionApi + 'term=' + term;
     const result = await this.http.get(thisApi).toPromise();

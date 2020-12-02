@@ -5,7 +5,7 @@
 </ion-header>
 <ion-content>
 
-    <ion-card *ngIf="!showmask">
+    <ion-card>
 
         <ion-card-content>
             <h3>Indiquez votre recherche</h3>
@@ -13,25 +13,35 @@
 
                 <ion-item>
                     <ion-label position="floating">Départ</ion-label>
-                    <ion-input id="From" type="text" formControlName="From"></ion-input>
+                    <ion-input id="From" type="text" formControlName="From" (ionInput)="getCity('from');"></ion-input>
+                </ion-item>
+
+                <ion-item *ngIf="cityfrom?.length>0">
+                    <ion-list>
+                        <ion-item *ngFor="let city of cityfrom" (click)="setCity(city.label,'from');">
+                            {{ city.label }}
+                        </ion-item>
+                    </ion-list>
                 </ion-item>
 
                 <ion-item>
                     <ion-label position="floating">Arrivée</ion-label>
-                    <ion-input id="To" type="text" formControlName="To"></ion-input>
+                    <ion-input id="To" type="text" formControlName="To" (ionInput)="getCity('to');"></ion-input>
                 </ion-item> 
+
+                <ion-item *ngIf="cityto?.length>0">
+                    <ion-list>
+                        <ion-item *ngFor="let city of cityto" (click)="setCity(city.label,'to');">
+                            <p>{{ city.label }}</p>
+                        </ion-item>
+                    </ion-list>
+                </ion-item>
+
                 <ion-button type="submit" color="danger">Chercher</ion-button>
             </form>
         </ion-card-content>
 
     </ion-card>
-
-    <ion-card *ngIf="showmask" class="center">
-        <ion-card-content>
-        <p>Veuillez patienter ...</p>
-    </ion-card-content>
-    </ion-card>
-    
     
     
 </ion-content>

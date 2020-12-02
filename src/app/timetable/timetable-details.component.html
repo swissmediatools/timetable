@@ -34,7 +34,7 @@
 
                 <ion-item *ngIf=" i>0 && (route.legs.length)>i+1">
                     <ion-thumbnail [ngStyle]="{'background-color': '#' + leg.bgcolor, 'color': '#' + leg.fgcolor }" class="ion-text-center ion-padding-vertical">
-                        {{ leg.line }}
+                        <img src="{{ leg | sbbicon }}">
                     </ion-thumbnail>
                     
                 <p><span class="tt_station">{{ leg.name }}</span><br>

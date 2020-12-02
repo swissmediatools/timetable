@@ -12,6 +12,7 @@ import { TimetableQueryComponent } from './timetable/timetable-query.component';
 import { TimetableResultComponent } from './timetable/timetable-result.component';
 import { TimetableDetailsComponent } from './timetable/timetable-details.component';
 import { DurationhhmmPipe } from './services/durationhhmm.pipe';
+import { SbbiconPipe } from './services/sbbicon.pipe';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { DurationhhmmPipe } from './services/durationhhmm.pipe';
     TimetableQueryComponent,
     TimetableResultComponent,
     TimetableDetailsComponent,
-    DurationhhmmPipe
+    DurationhhmmPipe,
+    SbbiconPipe
   ],
   imports: [
     BrowserModule,
