@@ -15,7 +15,7 @@
 
                 <ion-row>
                     <ion-col>Départ<br><span class="tt_time">{{ route.departure | date:'H:mm' }}</span></ion-col>
-                    <ion-col class="ion-text-center"><!-- {{ route.duration | durationhhmm }} --><br>
+                    <ion-col class="ion-text-center">{{ route.duration | durationhhmm }}<br>
                         <span *ngIf="route.legs.length==2">direct</span>
                         <span *ngIf="route.legs.length>2">{{ route.legs.length-2 }} chang.</span>
                     </ion-col>
@@ -33,6 +33,9 @@
             <div *ngFor="let leg of route.legs;let i = index">
 
                 <ion-item *ngIf=" i>0 && (route.legs.length)>i+1">
+                    <ion-thumbnail [ngStyle]="{'background-color': '#' + leg.bgcolor, 'color': '#' + leg.fgcolor }" class="ion-text-center ion-padding-vertical">
+                        {{ leg.line }}
+                    </ion-thumbnail>
                     
                 <p><span class="tt_station">{{ leg.name }}</span><br>
                     Arrivée à {{ leg.arrival | date:'H:mm'  }}<br>

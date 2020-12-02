@@ -10,9 +10,11 @@ export class DurationhhmmPipe implements PipeTransform {
     let minutes = value/60;
     let hours = minutes/60;
     let result = '';
+
     if (hours<1)
     {
       result = minutes + '\'';
+
     } else {
 
       result = hours + ':';
@@ -20,7 +22,9 @@ export class DurationhhmmPipe implements PipeTransform {
       let minutesflat = hoursflat * 60;
       let soldminutes = minutes - minutesflat;
       soldminutes <10 ? result += '0' + soldminutes : result += soldminutes;
+
     }
+    
     return result;
   }
 
