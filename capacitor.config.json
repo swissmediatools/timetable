@@ -1,0 +1,13 @@
+{
+  "appId": "com.swissmediatools.timetable",
+  "appName": "timetable",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "dist/timetable",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}

@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Demande d'horaire</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+
+    <ion-card *ngIf="!showmask">
+
+        <ion-card-content>
+            <h3>Indiquez votre recherche</h3>
+            <form [formGroup]='queryForm' (ngSubmit)="runQuery()">
+
+                <ion-item>
+                    <ion-label position="floating">Départ</ion-label>
+                    <ion-input id="From" type="text" formControlName="From"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label position="floating">Arrivée</ion-label>
+                    <ion-input id="To" type="text" formControlName="To"></ion-input>
+                </ion-item> 
+                <ion-button type="submit" color="danger">Chercher</ion-button>
+            </form>
+        </ion-card-content>
+
+    </ion-card>
+
+    <ion-card *ngIf="showmask" class="center">
+        <ion-card-content>
+        <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_MGBzTI.json"  background="transparent"  speed="1"  style="width: 350px; height: 200px;"  loop  autoplay></lottie-player>
+    </ion-card-content>
+    </ion-card>
+    
+    
+    
+</ion-content>

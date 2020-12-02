@@ -1,0 +1,54 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Détail</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-card>
+        <ion-card-content>
+            <ion-grid>
+
+                <ion-row>
+                    <ion-col class="tt_city">{{ route.from }}</ion-col>
+                    <ion-col class="ion-text-right tt_city">{{ route.to }}</ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col>Départ<br><span class="tt_time">{{ route.departure | date:'H:mm' }}</span></ion-col>
+                    <ion-col class="ion-text-center"><!-- {{ route.duration | durationhhmm }} --><br>
+                        <span *ngIf="route.legs.length==2">direct</span>
+                        <span *ngIf="route.legs.length>2">{{ route.legs.length-2 }} chang.</span>
+                    </ion-col>
+                    <ion-col class="ion-text-right">Arrivée<br><span class="tt_time">{{ route.arrival | date:'H:mm' }}</span></ion-col>
+                </ion-row>
+                
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-content>
+            <ion-item>
+                <p>Départ de <b> {{ route.legs[0].name }} </b> à <b> {{ route.departure | date:'H:mm' }} </b><br>Train <b>{{ route.legs[0].line }}</b> sur voie <b> {{ route.legs[0].track }} </b></p>
+            </ion-item>
+            <div *ngFor="let leg of route.legs;let i = index">
+
+                <ion-item *ngIf=" i>0 && (route.legs.length)>i+1">
+                    
+                <p><span class="tt_station">{{ leg.name }}</span><br>
+                    Arrivée à {{ leg.arrival | date:'H:mm'  }}<br>
+                    Départ à {{ leg.departure | date:'H:mm'  }} sur la voie {{ leg.track }}</p>
+
+                </ion-item>
+                
+            </div>
+            <ion-item>
+                <p>Arrivée à <b> {{ route.legs[(route.legs.length)-1].name }} </b> à  <b> {{ route.arrival | date:'H:mm' }} </b></p>
+            </ion-item>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-content>
+            <ion-button routerLink="/" size="small">Nouvelle recherche</ion-button>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

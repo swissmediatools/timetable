@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Résultats</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card *ngIf="!queryResult">
+        <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_MGBzTI.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop autoplay></lottie-player>
+    </ion-card>
+    <ion-card *ngIf="queryResult">
+        <ion-card-content>
+            <p>{{ queryResult.description }}</p>
+            <ion-list>
+                <ion-item *ngFor="let connection of queryResult.connections;" (click)="getDetail(connection)">
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col>{{ connection.departure | date:'H:mm' }}</ion-col>
+                            <ion-col>
+                                <div *ngIf="connection.legs.length==2">
+                                    direct
+                                </div>
+                                <div *ngIf="connection.legs.length>2">
+                                    {{ connection.legs.length-2 }} chang.
+                                </div>
+                            </ion-col>
+                            <ion-col>{{ connection.arrival | date:'H:mm' }}</ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-content>
+            
+            <ion-button routerLink="/" size="small">Nouvelle recherche</ion-button>
+        </ion-card-content>
+    </ion-card>
+</ion-content>
